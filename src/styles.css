@@ -156,6 +156,7 @@ body {
   background: #333;
   padding: 0.75rem;
   border-radius: 8px;
+  margin-bottom: 1.25rem;
 }
 .list-item-top {
   display: flex;
@@ -174,13 +175,15 @@ body {
   margin-left: 0.75rem;
 }
 .list-item-top-title-episode {
-  color: #33c41a;
-  margin-top:0;
+  color: #eee;
+  margin-top: 0;
   margin-bottom: 0.25rem;
+  font-size: 0.9rem;
 }
 .list-item-top-title-pod {
   font-weight: 400;
   color: #bbb;
+  font-size: 0.8rem;
 }
 .list-item-top-title-pod {
   margin: 0;
@@ -188,4 +191,39 @@ body {
 .list-item-top-more {
   height: 24px;
   opacity: 0.8;
+}
+.list-item-description {
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: #bbb;
+  margin: 0.75rem 0;
+  line-height: 1rem;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.list-item-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.list-item-bottom-play {
+  height: 36px;
+}
+.list-item-bottom-info {
+  color: #bbb;
+  font-size: 0.6rem;
+  margin-left: 0.5rem;
+  flex-grow: 1;
+}
+.list-item-bottom-download-icon {
+  height: 12px;
+    color: #bbb;
+    border: 1px solid #bbb;
+    border-radius: 20px;
+    padding: 4px;
 }
