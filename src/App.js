@@ -1,12 +1,10 @@
 import "./styles.css";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   motion,
   useViewportScroll,
-  useSpring,
   useTransform,
-  useMotionTemplate,
 } from "framer-motion";
 
 export default function App() {
