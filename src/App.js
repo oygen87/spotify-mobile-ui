@@ -34,6 +34,17 @@ export default function App() {
       },
     },
   };
+  const descriptionShowButtonVariants = {
+    closed: {
+      display: 'block',
+      transition: {
+        delay: 0.1,
+      },
+    },
+    open: {
+      display: 'none'
+    }
+  }
 
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(true);
@@ -136,13 +147,16 @@ export default function App() {
           >
             visa mindre
           </span>
-          <span
+          <motion.span
             className="description-mid-show"
-            style={{ display: isDescriptionOpen ? "none" : "block" }}
+            variants={descriptionShowButtonVariants}
+            initial="closed"
+            animate={isDescriptionOpen ? "open" : "closed"}
+            
             onClick={() => setIsDescriptionOpen(true)}
           >
             ... visa mer
-          </span>
+          </motion.span>
         </motion.div>
         <div className="description-bottom">
           <span className="description-bottom-tag">True crime</span>
