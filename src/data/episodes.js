@@ -1,5 +1,6 @@
 export const episodes = [
   {
+    podcast: "Darknet Diaries",
     title: "73: Wannacry",
     img: "darknet-wannacry.jpg",
     description: `It is recommend to listen to episodes 53 “Shadow Brokers”, 71
@@ -11,6 +12,7 @@ export const episodes = [
     playInfo: "TIS • 59MIN",
   },
   {
+    podcast: "Darknet Diaries",
     title: "72: Bangladesh Bank Heist",
     img: "darknet-bangladesh.jpg",
     description: `This story is about a bank robbery with the objective to steal 1
@@ -21,6 +23,7 @@ export const episodes = [
     playInfo: "27 AUG. • 1TIM 6MIN",
   },
   {
+    podcast: "Darknet Diaries",
     title: "71: FDFF",
     img: "darknet-fdff.jpg",
     description: `In this episode, we’re going into the depths of North Korea to
@@ -32,6 +35,7 @@ export const episodes = [
     playInfo: "19AUG. • 1TIM 2MIN",
   },
   {
+    podcast: "Darknet Diaries",
     title: "70: Ghost Exodus",
     img: "darknet-exodus.jpg",
     description: `It is recommend to listen to episodes 53 “Shadow Brokers”, 71
@@ -43,6 +47,7 @@ export const episodes = [
     playInfo: "12AUG. • 53MIN",
   },
   {
+    podcast: "Darknet Diaries",
     title: "69: Human Hacker",
     img: "darknet-humanhacker.jpg",
     description: `We all know that computers and networks are vulnerable to hacking
@@ -58,6 +63,7 @@ export const episodes = [
     playInfo: "6 AUG. • 1TIM 17MIN",
   },
   {
+    podcast: "Darknet Diaries",
     title: "68: Triton",
     img: "darknet-triton.jpg",
     description: `A mysterious mechanical failure one fateful night in a Saudi Arabian 
