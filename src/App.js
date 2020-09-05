@@ -1,12 +1,11 @@
 import "./styles/styles.css";
 import * as React from "react";
-import { useState, useEffect } from "react";
-import { motion, useViewportScroll, useTransform } from "framer-motion";
-import { episodes } from "./data/episodes";
+import { useState, useEffect, useCallback } from "react";
+import { motion, useViewportScroll, useTransform, useSpring } from "framer-motion";
 import { ListItem } from "./components/ListItem";
 import { colors } from "./variables/colors";
 
-export default function App() {
+export default function App({podcast}) {
   const { scrollY } = useViewportScroll();
 
   const headerScrollOpacity = useTransform(scrollY, [100, 110], [0, 1]);
@@ -14,6 +13,9 @@ export default function App() {
   const headerTitleScrollY = useTransform(scrollY, [80, 120], [20, 0]);
   const podScrollOpacity = useTransform(scrollY, [15, 100], [1, 0]);
   const moreOpacity = useTransform(scrollY, [114, 115], [0, 0.8]);
+
+  const toastSpring = useSpring(0);
+  const toastSpringScale = useTransform(toastSpring, [0, 1], [0.9, 1]);
 
   const followButtonVariants = {
     rest: { scale: 1 },
@@ -50,9 +52,22 @@ export default function App() {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(true);
   const [isPlaying, setIsPlaying] = useState(undefined);
-  const [lastPlayed, setLastPlayed] = useState(episodes[0]);
-
+  const [lastPlayed, setLastPlayed] = useState(podcast.episodes[0]);
   const [htmlBgColor, setHtmlBgColor] = useState(colors.red);
+  const [toast, setToast] = useState({open: false, message: null})
+
+  const showToast = useCallback(() => {
+    toastSpring.set(0);
+    setTimeout(() => toastSpring.set(1), 200);
+  }, [toastSpring]);
+
+  useEffect(() => {
+    if(toast.message) {
+      showToast();
+      const timeoutFn = setTimeout(() => toastSpring.set(0), 3000);
+      return () => clearTimeout(timeoutFn);
+    }
+  },[toast, toastSpring, showToast])
 
   useEffect(() => {
     const updateHtmlBackgroundColor = (y) => {
@@ -71,10 +86,13 @@ export default function App() {
     return () => {
       unsubscribe();
     };
-  }, [htmlBgColor]);
+  }, [htmlBgColor, scrollY]);
 
   return (
     <div className="App">
+      <motion.div className="toast" initial={false} style={{scale: toastSpringScale, opacity: toastSpring}}>
+      {toast.message}
+      </motion.div>
       <svg
         className="back"
         xmlns="http://www.w3.org/2000/svg"
@@ -98,9 +116,9 @@ export default function App() {
         stroke="currentColor"
       >
         <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1}
           d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
         />
       </motion.svg>
@@ -109,7 +127,7 @@ export default function App() {
           className="header-title"
           style={{ opacity: headerTitleScrollOpacity, y: headerTitleScrollY }}
         >
-          Darknet Diaries
+          {podcast.title}
         </motion.h5>
       </motion.div>
       <div className="pod">
@@ -120,8 +138,8 @@ export default function App() {
           alt="darknet diaries cover"
         />
         <motion.div className="pod-text" style={{ opacity: podScrollOpacity }}>
-          <h1 className="pod-text-title">Darknet Diaries</h1>
-          <h6 className="pod-text-author">Jack Rhysider</h6>
+          <h1 className="pod-text-title">{podcast.title}</h1>
+          <h6 className="pod-text-author">{podcast.author}</h6>
         </motion.div>
       </div>
       <div className="description">
@@ -131,7 +149,10 @@ export default function App() {
             initial="rest"
             whileTap="pressed"
             className={`description-top-follow ${isFollowing ? "active" : ""}`}
-            onClick={() => setIsFollowing((prev) => !prev)}
+            onClick={() => {
+              setIsFollowing((prev) => !prev);
+              setToast({open: true, message: isFollowing ? `Okej, du har slutat följa ${podcast.title}`: `Okej, du följer ${podcast.title}`})
+            }}
           >
             {isFollowing ? "FÖLJER" : "FÖLJ"}
           </motion.div>
@@ -143,9 +164,9 @@ export default function App() {
             stroke="currentColor"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1}
               d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
             />
           </svg>
@@ -157,12 +178,10 @@ export default function App() {
           animate={isDescriptionOpen ? "open" : "closed"}
         >
           <p className="description-mid-paragraph">
-            Explore true stories of the dark side of the Internet with host Jack
-            Rhysider as he takes you on a journey through the chilling world of
-            hacking, data breaches, and cyber crime.
+          {podcast.description}
           </p>
           <span className="description-mid-description">
-            Beskrivning av Jack Rhysider
+            Beskrivning av {podcast.author}
           </span>
           <span
             className="description-mid-hide"
@@ -190,7 +209,7 @@ export default function App() {
         <span className="sticky-list-header-sort">Sortera</span>
       </div>
       <div className="list">
-        {episodes.map((episode) => {
+        {podcast.episodes.map((episode) => {
           return (
             <ListItem
               key={episode.title}
@@ -224,9 +243,9 @@ export default function App() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="1"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth={1}
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1" />
             <polygon points="12 15 17 21 7 21 12 15" />
@@ -240,9 +259,9 @@ export default function App() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
               onClick={() => setIsPlaying(undefined)}
             >
               <rect x="3" y="4" width="4" height="16" fill="#EEEEEE" />
@@ -257,9 +276,9 @@ export default function App() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
               onClick={() => setIsPlaying(lastPlayed)}
             >
               <polygon
