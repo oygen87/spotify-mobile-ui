@@ -7,7 +7,6 @@ html {
 body {
   margin: 0;
   padding: 0;
-  
 }
 
 .App {
@@ -73,8 +72,8 @@ body {
 .pod-img {
   max-height: 100px;
   border-radius: 8px;
-  -webkit-box-shadow: 0px 0px 18px 5px rgba(0,0,0,0.3); 
-  box-shadow: 0px 0px 18px 5px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0px 0px 18px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 18px 5px rgba(0, 0, 0, 0.3);
 }
 .pod-text {
   flex-grow: 1;
@@ -132,7 +131,6 @@ body {
   line-height: 1.2rem;
   color: #aaa;
   margin-bottom: 0.5rem;
-  
 }
 .description-mid-description {
   display: block;
@@ -194,7 +192,7 @@ body {
 
 .list {
   padding: 1rem;
-  padding-bottom:7rem;
+  padding-bottom: 7rem;
 }
 .list-item {
   background: #333;
@@ -225,7 +223,7 @@ body {
   font-size: 0.9rem;
 }
 .list-item-top-title-episode.active {
-  color: #1DB954;
+  color: #1db954;
 }
 .list-item-top-title-pod {
   font-weight: 400;
@@ -270,10 +268,10 @@ body {
 }
 .list-item-bottom-download-icon {
   height: 12px;
-    color: #bbb;
-    border: 1px solid #bbb;
-    border-radius: 20px;
-    padding: 4px;
+  color: #bbb;
+  border: 1px solid #bbb;
+  border-radius: 20px;
+  padding: 4px;
 }
 
 .footer {
@@ -305,7 +303,7 @@ body {
 .footer-player-info-title {
   margin: 0;
   font-size: 0.8rem;
-  margin-bottom: 0.1rem
+  margin-bottom: 0.1rem;
 }
 .footer-player-info-podcast {
   margin: 0;
@@ -316,7 +314,8 @@ body {
 .footer-player-airplay {
   margin-right: 2rem;
 }
-.footer-player-play, .footer-player-pause {
+.footer-player-play,
+.footer-player-pause {
   margin-right: 1rem;
   cursor: pointer;
 }
@@ -327,7 +326,9 @@ body {
   justify-content: space-around;
   height: 80px;
 }
-.footer-menu-home, .footer-menu-search, .footer-menu-library {
+.footer-menu-home,
+.footer-menu-search,
+.footer-menu-library {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -335,10 +336,14 @@ body {
   padding-bottom: 1.5rem;
   position: relative;
 }
-.footer-menu-home-icon svg, .footer-menu-search-icon svg, .footer-menu-library-icon svg  {
+.footer-menu-home-icon svg,
+.footer-menu-search-icon svg,
+.footer-menu-library-icon svg {
   height: 24px;
 }
-.footer-menu-home-label, .footer-menu-search-label, .footer-menu-library-label {
+.footer-menu-home-label,
+.footer-menu-search-label,
+.footer-menu-library-label {
   font-size: 0.7rem;
   font-weight: 300;
   position: absolute;

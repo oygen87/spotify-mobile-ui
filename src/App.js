@@ -1,11 +1,16 @@
 import "./styles/styles.css";
 import * as React from "react";
 import { useState, useEffect, useCallback } from "react";
-import { motion, useViewportScroll, useTransform, useSpring } from "framer-motion";
+import {
+  motion,
+  useViewportScroll,
+  useTransform,
+  useSpring,
+} from "framer-motion";
 import { ListItem } from "./components/ListItem";
 import { colors } from "./variables/colors";
 
-export default function App({podcast}) {
+export default function App({ podcast }) {
   const { scrollY } = useViewportScroll();
 
   const headerScrollOpacity = useTransform(scrollY, [100, 110], [0, 1]);
@@ -54,7 +59,7 @@ export default function App({podcast}) {
   const [isPlaying, setIsPlaying] = useState(undefined);
   const [lastPlayed, setLastPlayed] = useState(podcast.episodes[0]);
   const [htmlBgColor, setHtmlBgColor] = useState(colors.red);
-  const [toast, setToast] = useState({open: false, message: null})
+  const [toast, setToast] = useState({ open: false, message: null });
 
   const showToast = useCallback(() => {
     toastSpring.set(0);
@@ -62,12 +67,12 @@ export default function App({podcast}) {
   }, [toastSpring]);
 
   useEffect(() => {
-    if(toast.message) {
+    if (toast.message) {
       showToast();
       const timeoutFn = setTimeout(() => toastSpring.set(0), 3000);
       return () => clearTimeout(timeoutFn);
     }
-  },[toast, toastSpring, showToast])
+  }, [toast, toastSpring, showToast]);
 
   useEffect(() => {
     const updateHtmlBackgroundColor = (y) => {
@@ -90,8 +95,12 @@ export default function App({podcast}) {
 
   return (
     <div className="App">
-      <motion.div className="toast" initial={false} style={{scale: toastSpringScale, opacity: toastSpring}}>
-      {toast.message}
+      <motion.div
+        className="toast"
+        initial={false}
+        style={{ scale: toastSpringScale, opacity: toastSpring }}
+      >
+        {toast.message}
       </motion.div>
       <svg
         className="back"
@@ -151,7 +160,12 @@ export default function App({podcast}) {
             className={`description-top-follow ${isFollowing ? "active" : ""}`}
             onClick={() => {
               setIsFollowing((prev) => !prev);
-              setToast({open: true, message: isFollowing ? `Okej, du har slutat följa ${podcast.title}`: `Okej, du följer ${podcast.title}`})
+              setToast({
+                open: true,
+                message: isFollowing
+                  ? `Okej, du har slutat följa ${podcast.title}`
+                  : `Okej, du följer ${podcast.title}`,
+              });
             }}
           >
             {isFollowing ? "FÖLJER" : "FÖLJ"}
@@ -177,9 +191,7 @@ export default function App({podcast}) {
           initial="closed"
           animate={isDescriptionOpen ? "open" : "closed"}
         >
-          <p className="description-mid-paragraph">
-          {podcast.description}
-          </p>
+          <p className="description-mid-paragraph">{podcast.description}</p>
           <span className="description-mid-description">
             Beskrivning av {podcast.author}
           </span>
