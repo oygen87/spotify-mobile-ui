@@ -2,13 +2,13 @@ import * as React from "react";
 
 export const ListItem = ({ episode, isPlaying, onPlay, onPause }) => {
   return (
-    <div className="list-item" key={episode.title}>
+    <div className="list-item">
       <div className="list-item-top">
-        <img className="list-item-top-img" src={episode.img} alt="wannacry" />
+        <img className="list-item-top-img" src={episode.img} alt={episode.title} />
         <div className="list-item-top-title">
           <h4
             className={`list-item-top-title-episode ${
-              isPlaying === episode.title ? "active" : ""
+              isPlaying === undefined ? "" : isPlaying.title === episode.title ? "active" : ""
             }`}
           >
             {episode.title}
@@ -32,7 +32,7 @@ export const ListItem = ({ episode, isPlaying, onPlay, onPause }) => {
       </div>
       <div className="list-item-description">{episode.description}</div>
       <div className="list-item-bottom">
-        {isPlaying === episode.title ? (
+        {isPlaying && isPlaying.title === episode.title ? (
           <svg
             className="list-item-bottom-play"
             xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ export const ListItem = ({ episode, isPlaying, onPlay, onPause }) => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            onClick={() => onPlay(episode.title)}
+            onClick={() => onPlay(episode)}
           >
             <path
               fill-rule="evenodd"

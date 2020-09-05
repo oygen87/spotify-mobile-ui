@@ -7,6 +7,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  
 }
 
 .App {
@@ -15,6 +16,7 @@ body {
   margin: 0;
   padding: 0;
   background: #151515;
+  position: relative;
 }
 
 .back {
@@ -177,6 +179,7 @@ body {
 
 .list {
   padding: 1rem;
+  padding-bottom:7rem;
 }
 .list-item {
   background: #333;
@@ -256,4 +259,53 @@ body {
     border: 1px solid #bbb;
     border-radius: 20px;
     padding: 4px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  background: #333;
+  width: 100%;
+  border-top: 2px solid #777;
+}
+.footer-player {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  align-items: center;
+}
+.footer-player-img {
+  height: 50px;
+}
+.footer-player-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1rem;
+  flex-grow: 1;
+}
+.footer-player-info-title {
+  margin: 0;
+  font-size: 0.8rem;
+  margin-bottom: 0.1rem
+}
+.footer-player-info-podcast {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: gray;
+}
+.footer-player-airplay {
+  margin-right: 2rem;
+}
+.footer-player-play, .footer-player-pause {
+  margin-right: 1rem;
+}
+
+.footer-menu {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
 }

@@ -1,9 +1,10 @@
 import "./styles/styles.css";
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { episodes } from "./data/episodes";
 import { ListItem } from "./components/ListItem";
+import { colors } from "./variables/colors";
 
 export default function App() {
   const { scrollY } = useViewportScroll();
@@ -36,19 +37,41 @@ export default function App() {
   };
   const descriptionShowButtonVariants = {
     closed: {
-      display: 'block',
+      display: "block",
       transition: {
         delay: 0.2,
       },
     },
     open: {
-      display: 'none'
-    }
-  }
+      display: "none",
+    },
+  };
 
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(true);
   const [isPlaying, setIsPlaying] = useState(undefined);
+  const [lastPlayed, setLastPlayed] = useState(episodes[0]);
+
+  const [htmlBgColor, setHtmlBgColor] = useState(colors.red);
+
+  useEffect(() => {
+    const updateHtmlBackgroundColor = (y) => {
+      if (y > 200 && htmlBgColor !== colors.black) {
+        document.querySelector("html").style.background = colors.black;
+        setHtmlBgColor(colors.black);
+      }
+      if (y < 200 && htmlBgColor !== colors.red) {
+        document.querySelector("html").style.background = colors.red;
+        setHtmlBgColor(colors.red);
+      }
+    };
+
+    const unsubscribe = scrollY.onChange(updateHtmlBackgroundColor);
+
+    return () => {
+      unsubscribe();
+    };
+  }, [htmlBgColor]);
 
   return (
     <div className="App">
@@ -152,7 +175,6 @@ export default function App() {
             variants={descriptionShowButtonVariants}
             initial="closed"
             animate={isDescriptionOpen ? "open" : "closed"}
-            
             onClick={() => setIsDescriptionOpen(true)}
           >
             ... visa mer
@@ -171,13 +193,85 @@ export default function App() {
         {episodes.map((episode) => {
           return (
             <ListItem
+              key={episode.title}
               episode={episode}
               isPlaying={isPlaying}
-              onPlay={(ep) => setIsPlaying(ep)}
+              onPlay={(ep) => {
+                setIsPlaying(ep);
+                setLastPlayed(ep);
+              }}
               onPause={() => setIsPlaying(undefined)}
             />
           );
         })}
+      </div>
+      <div className="footer">
+        <div className="footer-player">
+          <img
+            className="footer-player-img"
+            src={lastPlayed.img}
+            alt={lastPlayed.title}
+          />
+          <div className="footer-player-info">
+            <h4 className="footer-player-info-title">{lastPlayed.title}</h4>
+            <h5 className="footer-player-info-podcast">{lastPlayed.podcast}</h5>
+          </div>
+          <svg
+            className="footer-player-airplay"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1" />
+            <polygon points="12 15 17 21 7 21 12 15" />
+          </svg>
+          {isPlaying ? (
+             <svg
+             className="footer-player-pause"
+             xmlns="http://www.w3.org/2000/svg"
+             width="18"
+             height="18"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             onClick={() => setIsPlaying(undefined)}
+           >
+             <rect x="3" y="4" width="4" height="16" fill="#EEEEEE" />
+             <rect x="14" y="4" width="4" height="16" fill="#EEEEEE"/>
+           </svg>
+            
+          ) : (
+            <svg
+            className="footer-player-play"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            onClick={() => setIsPlaying(lastPlayed)}
+          >
+            <polygon
+              fill="#EEEEEE"
+              stroke="#EEEEEE"
+              points="5 3 19 12 5 21 5 3"
+            />
+          </svg>
+          )}
+        </div>
+        <div className="footer-menu"></div>
       </div>
     </div>
   );
