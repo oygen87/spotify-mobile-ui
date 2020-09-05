@@ -211,8 +211,7 @@ export const PodcastView = ({ podcast }) => {
             </motion.span>
           </motion.div>
           <div className="description-bottom">
-            <span className="description-bottom-tag">True crime</span>
-            <span className="description-bottom-tag">Teknologi</span>
+            {podcast.tags.map((tag) => <span className="description-bottom-tag" key={tag}>{tag}</span>)}
           </div>
         </div>
         <div className="sticky-list-header">

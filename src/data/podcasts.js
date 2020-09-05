@@ -5,6 +5,7 @@ export const podcasts = [
     description: `Explore true stories of the dark side of the Internet with host Jack
     Rhysider as he takes you on a journey through the chilling world of
     hacking, data breaches, and cyber crime.`,
+    tags: ["True crime", "Teknologi"],
     episodes: [
       {
         podcast: "Darknet Diaries",
@@ -87,7 +88,6 @@ export const podcasts = [
         are manufacturing or public infrastructure facilities around the world.`,
         playInfo: "29 JULI • 56MIN",
       },
-    ]
+    ],
   },
-  
 ];
