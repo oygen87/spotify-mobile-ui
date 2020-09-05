@@ -24,7 +24,7 @@ export default function App() {
       height: 53,
       transition: {
         duration: 0,
-        delay: 0.1,
+        delay: 0.2,
       },
     },
     open: {
@@ -38,7 +38,7 @@ export default function App() {
     closed: {
       display: 'block',
       transition: {
-        delay: 0.1,
+        delay: 0.2,
       },
     },
     open: {
