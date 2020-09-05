@@ -95,6 +95,7 @@ body {
   padding: 0.5rem;
   font-size: 0.5rem;
   letter-spacing: 1.5px;
+  cursor: pointer;
 }
 .description-top-follow.active {
   border: 1px solid #eee;
@@ -107,11 +108,35 @@ body {
 
 .description-mid {
   margin-top: 1rem;
+  position: relative;
+  overflow-y: hidden;
+  margin-bottom: 0.5rem;
 }
 .description-mid-paragraph {
   font-size: 0.8rem;
   line-height: 1.2rem;
   color: #aaa;
+  margin-bottom: 0.5rem;
+  
+}
+.description-mid-description {
+  display: block;
+  font-size: 0.8rem;
+  color: gray;
+  margin-bottom: 0.5rem;
+}
+.description-mid-show {
+  right: 0;
+  position: absolute;
+  bottom: 4px;
+  background: #151515;
+  font-size: 0.8rem;
+  padding-left: 0.5rem;
+  font-weight: 700;
+}
+.description-mid-hide {
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 .description-bottom {
@@ -181,6 +206,9 @@ body {
   margin-bottom: 0.25rem;
   font-size: 0.9rem;
 }
+.list-item-top-title-episode.active {
+  color: #1DB954;
+}
 .list-item-top-title-pod {
   font-weight: 400;
   color: #bbb;
@@ -214,6 +242,7 @@ body {
 }
 .list-item-bottom-play {
   height: 36px;
+  cursor: pointer;
 }
 .list-item-bottom-info {
   color: #bbb;

@@ -17,6 +17,23 @@ export default function App() {
     pressed: { scale: 0.95 },
   };
 
+  const descriptionVariants = {
+    closed: {
+      height: 53,
+      transition: {
+        duration: 0,
+        delay: 0.1,
+      },
+    },
+    open: {
+      height: "auto",
+      transition: {
+        delay: 0.1,
+      },
+    },
+  };
+
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(true);
   const [isPlaying, setIsPlaying] = useState(undefined);
 
@@ -97,13 +114,34 @@ export default function App() {
             />
           </svg>
         </div>
-        <div className="description-mid">
+        <motion.div
+          className="description-mid"
+          variants={descriptionVariants}
+          initial="closed"
+          animate={isDescriptionOpen ? "open" : "closed"}
+        >
           <p className="description-mid-paragraph">
             Explore true stories of the dark side of the Internet with host Jack
             Rhysider as he takes you on a journey through the chilling world of
             hacking, data breaches, and cyber crime.
           </p>
-        </div>
+          <span className="description-mid-description">
+            Beskrivning av Jack Rhysider
+          </span>
+          <span
+            className="description-mid-hide"
+            onClick={() => setIsDescriptionOpen(false)}
+          >
+            visa mindre
+          </span>
+          <span
+            className="description-mid-show"
+            style={{ display: isDescriptionOpen ? "none" : "block" }}
+            onClick={() => setIsDescriptionOpen(true)}
+          >
+            ... visa mer
+          </span>
+        </motion.div>
         <div className="description-bottom">
           <span className="description-bottom-tag">True crime</span>
           <span className="description-bottom-tag">Teknologi</span>
@@ -124,7 +162,7 @@ export default function App() {
                   alt="wannacry"
                 />
                 <div className="list-item-top-title">
-                  <h4 className="list-item-top-title-episode">
+                  <h4 className={`list-item-top-title-episode ${isPlaying === episode.title ? 'active' : ''}`}>
                     {episode.title}
                   </h4>
                   <h5 className="list-item-top-title-pod">Darknet Diaries</h5>
