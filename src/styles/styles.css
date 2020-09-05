@@ -73,6 +73,8 @@ body {
 .pod-img {
   max-height: 100px;
   border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 18px 5px rgba(0,0,0,0.3); 
+  box-shadow: 0px 0px 18px 5px rgba(0,0,0,0.3);
 }
 .pod-text {
   flex-grow: 1;
