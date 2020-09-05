@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const ListItem = ({ episode, isPlaying, onPlay, onPause }) => {
+export const PodcastListItem = ({ episode, isPlaying, onPlay, onPause }) => {
   return (
     <div className="list-item">
       <div className="list-item-top">
