@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
 import { Episode } from "../../types/types";
 import {
