@@ -12,7 +12,6 @@ import { PlayerContext } from "../../context/PlayerContext";
 
 export const PodcastView = ({ podcast }) => {
   const playerContext = useContext(PlayerContext);
-  console.log(playerContext);
   const { scrollY } = useViewportScroll();
 
   const headerScrollOpacity = useTransform(scrollY, [100, 110], [0, 1]);
