@@ -1,6 +1,10 @@
 # Spotify Mobile UI
 
-Personal project to recreate Spotify mobile app UI, animations and transitions for Iphone with React.js and framer-motion for web.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6412476e-8154-4f67-b7d2-af2c0b78262b/deploy-status)](https://app.netlify.com/sites/spotify-mobile/deploys)
+
+Personal project to recreate the Spotify mobile app UI.
+
+Using React.js and Framer-motion for animations.
 
 Only tested on Iphone XR.
 
