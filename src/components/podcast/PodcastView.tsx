@@ -11,7 +11,6 @@ import { colors } from "../../variables/colors";
 import { PlayerContext } from "../../context/PlayerContext";
 import { useChangeableHtmlBackgroundColors } from "../../hooks/useChangeableHtmlBackgroundColors";
 import { Podcast } from "../../types/types";
-import { Footer } from "../common/Footer";
 
 interface Props {
   podcast: Podcast;
