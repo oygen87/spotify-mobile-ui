@@ -9,10 +9,13 @@ import {
 import { PodcastListItem } from "./PodcastListItem";
 import { colors } from "../../variables/colors";
 import { PlayerContext } from "../../context/PlayerContext";
+import { useChangeableHtmlBackgroundColors } from "../../hooks/useChangeableHtmlBackgroundColors";
 
 export const PodcastView = ({ podcast }) => {
   const playerContext = useContext(PlayerContext);
   const { scrollY } = useViewportScroll();
+
+  useChangeableHtmlBackgroundColors(colors.red, colors.black, 200);
 
   const headerScrollOpacity = useTransform(scrollY, [100, 110], [0, 1]);
   const headerTitleScrollOpacity = useTransform(scrollY, [80, 120], [0, 1]);
@@ -57,7 +60,6 @@ export const PodcastView = ({ podcast }) => {
 
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(true);
-  const [htmlBgColor, setHtmlBgColor] = useState(colors.red);
   const [toast, setToast] = useState({ open: false, message: null });
 
   const showToast = useCallback(() => {
@@ -72,25 +74,6 @@ export const PodcastView = ({ podcast }) => {
       return () => clearTimeout(timeoutFn);
     }
   }, [toast, toastSpring, showToast]);
-
-  useEffect(() => {
-    const updateHtmlBackgroundColor = (y) => {
-      if (y > 200 && htmlBgColor !== colors.black) {
-        document.querySelector("html").style.background = colors.black;
-        setHtmlBgColor(colors.black);
-      }
-      if (y < 200 && htmlBgColor !== colors.red) {
-        document.querySelector("html").style.background = colors.red;
-        setHtmlBgColor(colors.red);
-      }
-    };
-
-    const unsubscribe = scrollY.onChange(updateHtmlBackgroundColor);
-
-    return () => {
-      unsubscribe();
-    };
-  }, [htmlBgColor, scrollY]);
 
   return (
     <div className="App">
