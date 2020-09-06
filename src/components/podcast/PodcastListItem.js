@@ -1,14 +1,22 @@
 import * as React from "react";
+import { useContext } from "react";
+import { PlayerContext } from "../../context/PlayerContext";
 
 export const PodcastListItem = ({ episode, isPlaying, onPlay, onPause }) => {
+  const playerContext = useContext(PlayerContext);
+
   return (
     <div className="list-item">
       <div className="list-item-top">
-        <img className="list-item-top-img" src={episode.img} alt={episode.title} />
+        <img
+          className="list-item-top-img"
+          src={episode.img}
+          alt={episode.title}
+        />
         <div className="list-item-top-title">
           <h4
             className={`list-item-top-title-episode ${
-              isPlaying === undefined ? "" : isPlaying.title === episode.title ? "active" : ""
+              isPlaying ? "active" : ""
             }`}
           >
             {episode.title}
@@ -32,7 +40,7 @@ export const PodcastListItem = ({ episode, isPlaying, onPlay, onPause }) => {
       </div>
       <div className="list-item-description">{episode.description}</div>
       <div className="list-item-bottom">
-        {isPlaying && isPlaying.title === episode.title ? (
+        {isPlaying && playerContext.player.episode.title === episode.title ? (
           <svg
             className="list-item-bottom-play"
             xmlns="http://www.w3.org/2000/svg"
