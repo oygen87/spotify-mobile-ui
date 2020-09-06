@@ -1,17 +1,70 @@
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
 import { Episode } from "../../types/types";
+import {
+  motion,
+  useAnimation,
+} from "framer-motion";
 
 interface Props {
   episode: Episode;
   isPlaying: boolean;
-  onPlay: (e: Episode) => void;
-  onPause: () => void;
 }
 
-export const PodcastListItem = ({ episode, isPlaying, onPlay, onPause }: Props) => {
+export const PodcastListItem = ({
+  episode,
+  isPlaying,
+}: Props) => {
   const playerContext = useContext(PlayerContext);
+  const control = useAnimation();
+
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [isDownloaded, setIsDownloaded] = useState(false);
+
+  const startDownload = async () => {
+    // Fake download speed
+    setIsDownloading(true);
+    await control.start({
+      strokeDashoffset: 80,
+      transition: { duration: 0.8 },
+    });
+    await control.start({
+      strokeDashoffset: 77,
+      transition: { duration: 0.8 },
+    });
+    await control.start({
+      strokeDashoffset: 70,
+      transition: { duration: 0.7 },
+    });
+    await control.start({
+      strokeDashoffset: 60,
+      transition: { duration: 0.3 },
+    });
+    await control.start({
+      strokeDashoffset: 40,
+      transition: { duration: 0.6 },
+    });
+    await control.start({
+      strokeDashoffset: 38,
+      transition: { duration: 0.4 },
+    });
+    await control.start({
+      strokeDashoffset: 32,
+      transition: { duration: 0.2 },
+    });
+    await control.start({
+      strokeDashoffset: 30,
+      transition: { duration: 0.5 },
+    });
+    setIsDownloading(false);
+    setIsDownloaded(true);
+  };
+
+  const stopDownload = () => {
+    control.stop();
+    setIsDownloading(false);
+  }
 
   return (
     <div className="list-item">
@@ -54,7 +107,11 @@ export const PodcastListItem = ({ episode, isPlaying, onPlay, onPause }: Props) 
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            onClick={() => onPause()}
+            onClick={() =>
+              playerContext.setPlayer((prev) => ({
+                ...prev,
+                isPlaying: false,
+              }))}
           >
             <path
               fillRule="evenodd"
@@ -68,7 +125,7 @@ export const PodcastListItem = ({ episode, isPlaying, onPlay, onPause }: Props) 
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            onClick={() => onPlay(episode)}
+            onClick={() => playerContext.setPlayer({ isPlaying: true, episode: episode })}
           >
             <path
               fillRule="evenodd"
@@ -78,12 +135,56 @@ export const PodcastListItem = ({ episode, isPlaying, onPlay, onPause }: Props) 
           </svg>
         )}
         <span className="list-item-bottom-info">{episode.playInfo}</span>
-        <svg
-          className="list-item-bottom-download-icon"
+        {isDownloading ? (<>
+          <svg className="list-item-bottom-progress" height="26" width="26" onClick={stopDownload}>
+            <motion.circle
+              cx="13"
+              cy="13"
+              r="11"
+              stroke="#1db954"
+              strokeWidth="2"
+              strokeDasharray="100"
+              strokeDashoffset="100"
+              animate={control}
+              fill="none"
+            />
+            <rect width="8" height="8" x="9" y="9" style={{fill: "white"}} />
+          </svg>
+          <svg className="list-item-bottom-progress-background" height="26" width="26" onClick={stopDownload}>
+          <circle
+            cx="13"
+            cy="13"
+            r="11"
+            stroke="gray"
+            strokeWidth="1"
+            fill="none"
+          />
+        </svg></>
+        ) : !isDownloaded ? (
+          <svg
+            onClick={startDownload}
+            className="list-item-bottom-download-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
+        ) : (<motion.svg
+          className="list-item-bottom-download-icon-done"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          initial={{scale: 0.8}}
+          animate={{scale: 1}}
+          onClick={() => setIsDownloaded(false)}
         >
           <path
             strokeLinecap="round"
@@ -91,7 +192,7 @@ export const PodcastListItem = ({ episode, isPlaying, onPlay, onPause }: Props) 
             strokeWidth={2}
             d="M19 14l-7 7m0 0l-7-7m7 7V3"
           />
-        </svg>
+        </motion.svg>)}
       </div>
     </div>
   );

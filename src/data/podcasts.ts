@@ -22,6 +22,7 @@ export const podcasts: Podcast[] = [
             Security researchers scrambled to try to figure out how to stop it
             and who was behind it.`,
         playInfo: "TIS • 59MIN",
+        isDownloaded: false,
       },
       {
         podcast: "Darknet Diaries",
@@ -34,6 +35,7 @@ export const podcasts: Podcast[] = [
             was Geoff White. Learn more about him at geoffwhite.tech. Check out
             Geoff’s new book Crime Dot Com.`,
         playInfo: "27 AUG. • 1TIM 6MIN",
+        isDownloaded: false,
       },
       {
         podcast: "Darknet Diaries",
@@ -47,6 +49,7 @@ export const podcasts: Podcast[] = [
             Alex Gladstein for telling us the inside story. You can find more
             about Flash Drive For Freedom at flashdrivesforfreedom.org.`,
         playInfo: "19AUG. • 1TIM 2MIN",
+        isDownloaded: false,
       },
       {
         podcast: "Darknet Diaries",
@@ -60,6 +63,7 @@ export const podcasts: Podcast[] = [
             Security researchers scrambled to try to figure out how to stop it
             and who was behind it.`,
         playInfo: "12AUG. • 53MIN",
+        isDownloaded: false,
       },
       {
         podcast: "Darknet Diaries",
@@ -77,6 +81,7 @@ export const podcasts: Podcast[] = [
             knew what social engineering was and tells some of his amazing
             stories from his long career in penetration testing.`,
         playInfo: "6 AUG. • 1TIM 17MIN",
+        isDownloaded: false,
       },
       {
         podcast: "Darknet Diaries",
@@ -90,6 +95,7 @@ export const podcasts: Podcast[] = [
         We also consider how this kind of attack may pose a threat to human life wherever there 
         are manufacturing or public infrastructure facilities around the world.`,
         playInfo: "29 JULI • 56MIN",
+        isDownloaded: false,
       },
     ],
   },

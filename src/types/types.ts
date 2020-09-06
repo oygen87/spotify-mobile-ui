@@ -5,6 +5,7 @@ export interface Episode {
   img: string;
   description: string;
   playInfo: string;
+  isDownloaded: boolean;
 }
 
 export interface Podcast {

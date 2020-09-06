@@ -221,20 +221,10 @@ export const PodcastView = ({ podcast }: Props) => {
                 playerContext.player.isPlaying &&
                 playerContext.player.episode.title === episode.title
               }
-              onPlay={(ep) => {
-                playerContext.setPlayer({ isPlaying: true, episode: ep });
-              }}
-              onPause={() =>
-                playerContext.setPlayer((prev) => ({
-                  ...prev,
-                  isPlaying: false,
-                }))
-              }
             />
           );
         })}
       </div>
-      <Footer />
     </div>
   );
 };

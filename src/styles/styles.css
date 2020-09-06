@@ -6,11 +6,11 @@ html {
 body {
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
+  color: #eee;
 }
 
 .App {
-  font-family: sans-serif;
-  color: #eee;
   margin: 0;
   padding: 0;
   background: #151515;
@@ -33,7 +33,7 @@ body {
   max-height: 24px;
   max-width: 24px;
   position: fixed;
-  z-index: 2;
+  z-index: 6;
   left: 8px;
   top: 18px;
   opacity: 0.8;
@@ -43,7 +43,7 @@ body {
   max-height: 24px;
   max-width: 24px;
   position: fixed;
-  z-index: 2;
+  z-index: 6;
   right: 8px;
   top: 18px;
 }
@@ -54,7 +54,7 @@ body {
   width: 100%;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -177,7 +177,7 @@ body {
   align-items: center;
   padding: 0 1rem;
   top: 60px;
-  z-index: 1;
+  z-index: 5;
 }
 
 .sticky-list-header-title {
@@ -185,7 +185,7 @@ body {
   font-size: 1rem;
 }
 .sticky-list-header-sort {
-  background: #333;
+  background: #272727;
   padding: 0.4rem 1.15rem;
   font-size: 0.8rem;
   border-radius: 4px;
@@ -196,7 +196,7 @@ body {
   padding-bottom: 9rem;
 }
 .list-item {
-  background: #333;
+  background: #272727;
   padding: 0.75rem;
   border-radius: 8px;
   margin-bottom: 1.25rem;
@@ -273,6 +273,26 @@ body {
   border: 1px solid #bbb;
   border-radius: 20px;
   padding: 4px;
+  cursor: pointer;
+}
+.list-item-bottom-download-icon-done {
+  height: 12px;
+  stroke: #272727;
+  border: 1px solid #1db954;
+  border-radius: 20px;
+  padding: 4px;
+  background: #1db954;
+  cursor: pointer;
+}
+.list-item-bottom-progress {
+  z-index:4;
+  transform: rotate(-90deg);
+  cursor: pointer;
+}
+.list-item-bottom-progress-background {
+  position: absolute;
+  right: 1.7rem;
+  z-index:1;
 }
 
 .footer {
@@ -280,9 +300,9 @@ body {
   flex-direction: column;
   position: fixed;
   bottom: 0;
-  background: #333;
+  background: #272727;
   width: 100%;
-  border-top: 2px solid #777;
+  border-top: 2px solid #555;
 }
 .footer-player {
   display: flex;
