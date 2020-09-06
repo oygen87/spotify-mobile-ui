@@ -4,7 +4,9 @@
 
 Personal project to recreate the Spotify mobile app UI.
 
-Using React.js and Framer-motion for animations.
+* Typescript
+* React.js
+* Framer-motion
 
 Only tested on Iphone XR.
 
