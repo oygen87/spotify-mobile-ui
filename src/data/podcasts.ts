@@ -1,4 +1,6 @@
-export const podcasts = [
+import { Podcast } from "../types/types";
+
+export const podcasts: Podcast[] = [
   {
     title: "Darknet Diaries",
     author: "Jack Rhysider",
@@ -6,6 +8,7 @@ export const podcasts = [
     Rhysider as he takes you on a journey through the chilling world of
     hacking, data breaches, and cyber crime.`,
     tags: ["True crime", "Teknologi"],
+    accentColor: "#cf0000",
     episodes: [
       {
         podcast: "Darknet Diaries",

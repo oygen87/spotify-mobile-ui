@@ -3,7 +3,6 @@ html {
   margin: 0;
   padding: 0;
 }
-
 body {
   margin: 0;
   padding: 0;
@@ -29,6 +28,7 @@ body {
   padding: 0.8rem;
   font-size: 0.8rem;
 }
+
 .back {
   max-height: 24px;
   max-width: 24px;
@@ -38,6 +38,7 @@ body {
   top: 18px;
   opacity: 0.8;
 }
+
 .more {
   max-height: 24px;
   max-width: 24px;

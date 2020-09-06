@@ -1,8 +1,16 @@
 import * as React from "react";
 import { useContext } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
+import { Episode } from "../../types/types";
 
-export const PodcastListItem = ({ episode, isPlaying, onPlay, onPause }) => {
+interface Props {
+  episode: Episode;
+  isPlaying: boolean;
+  onPlay: (e: Episode) => void;
+  onPause: () => void;
+}
+
+export const PodcastListItem = ({ episode, isPlaying, onPlay, onPause }: Props) => {
   const playerContext = useContext(PlayerContext);
 
   return (
@@ -46,7 +54,7 @@ export const PodcastListItem = ({ episode, isPlaying, onPlay, onPause }) => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            onClick={() => onPause(undefined)}
+            onClick={() => onPause()}
           >
             <path
               fillRule="evenodd"
